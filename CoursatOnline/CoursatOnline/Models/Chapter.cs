@@ -1,0 +1,19 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+namespace CoursatOnline.Models
+{
+    public class Chapter
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Video { get; set; }
+        public DateTime DateAdded { get; set; }
+        public bool Show { get; set; }
+        [ForeignKey("_Course")]
+        public int CrsId { get; set; }
+        [ForeignKey("_Instructor")]
+        public int InsId { get; set; }
+        public Course _Course { get; set; }
+        public Instructor _Instructor { get; set; }
+        public virtual List<Comment> _Comments { get; set; }
+    }
+}
