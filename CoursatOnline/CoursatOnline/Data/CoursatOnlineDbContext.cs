@@ -32,8 +32,15 @@ namespace CoursatOnline.Data
                         .HasValue<Admin>(Roles.Admin)
                         .HasValue<Instructor>(Roles.Instructor)
                         .HasValue<Student>(Roles.Student);
-
-
+            modelBuilder.Entity<User>()
+                  .HasIndex(u => u.Email)
+                  .IsUnique();
+            modelBuilder.Entity<User>()
+                 .HasIndex(u => u.User_Name)
+                 .IsUnique();
+            modelBuilder.Entity<User>()
+                .Property(u => u.Show)
+                .HasDefaultValue(true);
             modelBuilder.Entity<CategoriesCourses>()
                         .HasKey(CC => new { CC.CatId, CC.CourseId });
             modelBuilder.Entity<CategoriesCourses>()
@@ -127,6 +134,39 @@ namespace CoursatOnline.Data
                         .HasForeignKey(Comment => Comment.ChapterId)
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired(false);
+            modelBuilder.Entity<Cart>()
+                .Property(cart => cart.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Category>()
+                .Property(category => category.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Chapter>()
+                .Property(chapter => chapter.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Comment>()
+                .Property(comment => comment.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<Course>()
+                .Property(course => course.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<User>()
+                .Property(u => u.Show)
+                .HasDefaultValue(true);
+            modelBuilder.Entity<CartItem>()
+               .Property(CI => CI.DateAdded)
+               .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Chapter>()
+              .Property(chapter => chapter.DateAdded)
+              .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Comment>()
+             .Property(comment => comment.DateAdded)
+             .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Rating>()
+             .Property(rating => rating.Date)
+             .HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Course>()
+            .Property(course => course.IsPaid)
+            .HasDefaultValue(false);
         }
     }
 }

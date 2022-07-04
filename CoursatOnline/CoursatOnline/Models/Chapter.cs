@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace CoursatOnline.Models
 {
     public class Chapter
     {
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Video { get; set; }
+        [Required]
         public DateTime DateAdded { get; set; }
         public bool Show { get; set; }
         [ForeignKey("_Course")]

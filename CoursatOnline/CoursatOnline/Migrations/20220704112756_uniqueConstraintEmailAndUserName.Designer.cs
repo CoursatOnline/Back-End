@@ -4,6 +4,7 @@ using CoursatOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    partial class CoursatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220704112756_uniqueConstraintEmailAndUserName")]
+    partial class uniqueConstraintEmailAndUserName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("float");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<int>("StdId")
                         .HasColumnType("int");
@@ -67,9 +67,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateAdded")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(6260));
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -114,9 +112,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -137,17 +133,13 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateAdded")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(7077));
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("InsId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -182,14 +174,10 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateAdded")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(7771));
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -223,9 +211,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsPaid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -235,9 +221,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("float");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -282,9 +266,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(8516));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -367,9 +349,7 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("User_Name")
                         .IsRequired()

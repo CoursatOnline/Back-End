@@ -1,12 +1,18 @@
 ﻿namespace CoursatOnline.Models
 {
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     public class Course
     {
         public int Id { get; set; }
+        [Required]
+        [Range(minimum:3,maximum:30)]
         public string Name { get; set; }
+        [Range(minimum:0,maximum:500)]
         public string Description { get; set; }
+        [Required]
         public double Price { get; set; }
+        [Required]
         public bool IsPaid { get; set; }
         public bool Show { get; set; }
         [ForeignKey("_Instructor")]
