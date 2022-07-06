@@ -33,14 +33,14 @@ namespace CoursatOnline.Data
                         .HasValue<Instructor>(Roles.Instructor)
                         .HasValue<Student>(Roles.Student);
             modelBuilder.Entity<User>()
-                  .HasIndex(u => u.Email)
-                  .IsUnique();
+                        .HasIndex(u => u.Email)
+                        .IsUnique();
             modelBuilder.Entity<User>()
-                 .HasIndex(u => u.User_Name)
-                 .IsUnique();
+                        .HasIndex(u => u.User_Name)
+                        .IsUnique();
             modelBuilder.Entity<User>()
-                .Property(u => u.Show)
-                .HasDefaultValue(true);
+                        .Property(u => u.Show)
+                        .HasDefaultValue(true);
             modelBuilder.Entity<CategoriesCourses>()
                         .HasKey(CC => new { CC.CatId, CC.CourseId });
             modelBuilder.Entity<CategoriesCourses>()

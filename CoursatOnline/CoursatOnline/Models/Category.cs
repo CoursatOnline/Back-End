@@ -6,12 +6,12 @@ namespace CoursatOnline.Models
     {
         public int Id { get; set; }
         [Required]
-        [Range(minimum:2,maximum:30,ErrorMessage = "Category Name must be betwen 2 to 30 charactars")]
+        [Range(minimum: 2, maximum: 50, ErrorMessage = "Category Name must be betwen 2 to 50 charactars")]
         public string Name { get; set; }
         public bool Show { get; set; }
         [ForeignKey("_Admin")]
         public int AdminId { get; set; }
-        public Admin _Admin { get; set; }
-        public virtual List<CategoriesCourses> _CategoriesCourses { get; set; }
+        public virtual Admin _Admin { get; set; }
+        public virtual List<CategoriesCourses>? _CategoriesCourses { get; set; }
     }
 }

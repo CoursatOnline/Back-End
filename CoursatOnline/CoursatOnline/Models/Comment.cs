@@ -15,7 +15,7 @@ namespace CoursatOnline.Models
         public int ChapterId { get; set; }
         [ForeignKey("_User")]
         public int UserId { get; set; }
-        public Chapter _Chapter { get; set; }
+        public virtual Chapter _Chapter { get; set; }
         public virtual User _User { get; set; }
     }
 }

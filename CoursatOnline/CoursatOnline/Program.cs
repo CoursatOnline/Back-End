@@ -1,15 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using EFCore.CheckConstraints;
 using CoursatOnline.Data;
+using CoursatOnline.Models;
+using CoursatOnline.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(n=>n.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
+                .UseLazyLoadingProxies()
                 .UseSqlServer(builder.Configuration.GetConnectionString("CoursatOnlineConn"))
                 .UseDiscriminatorCheckConstraints()
                 .UseEnumCheckConstraints());
+builder.Services.AddScoped<IRepository<Student>, StudentRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

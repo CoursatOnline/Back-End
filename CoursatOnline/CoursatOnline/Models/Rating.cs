@@ -13,7 +13,7 @@ namespace CoursatOnline.Models
         public DateTime Date { get; set; }
         [ForeignKey("_Course")]
         public int CrsId { get; set; }
-        public Course _Course { get; set; }
-        public virtual StudentRating _StudentRating { get; set; }
+        public virtual Course? _Course { get; set; }
+        public virtual StudentRating? _StudentRating { get; set; }
     }
 }

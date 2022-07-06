@@ -15,8 +15,8 @@ namespace CoursatOnline.Models
         public int CrsId { get; set; }
         [ForeignKey("_Instructor")]
         public int InsId { get; set; }
-        public Course _Course { get; set; }
-        public Instructor _Instructor { get; set; }
-        public virtual List<Comment> _Comments { get; set; }
+        public virtual Course _Course { get; set; }
+        public virtual Instructor _Instructor { get; set; }
+        public virtual List<Comment>? _Comments { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace CoursatOnline.Models
         [ForeignKey("_Course")]
         public int CourseId { get; set; }
         public DateTime DateAdded { get; set; }
-        public Category _Category { get; set; }
-        public Course _Course { get; set; }
+        public virtual Category _Category { get; set; }
+        public virtual Course _Course { get; set; }
     }
 }

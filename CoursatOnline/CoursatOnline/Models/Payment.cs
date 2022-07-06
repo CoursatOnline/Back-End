@@ -12,6 +12,6 @@ namespace CoursatOnline.Models
         public DateTime DateDone { get; set; }
         //[Required]
         public double PaymentAmount { get; set; }
-        public virtual StudentRegisters _StudentRegistered { get; set; }
+        public virtual StudentRegisters? _StudentRegistered { get; set; }
     }
 }
