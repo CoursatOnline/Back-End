@@ -14,6 +14,8 @@ builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
                 .UseDiscriminatorCheckConstraints()
                 .UseEnumCheckConstraints());
 builder.Services.AddScoped<IRepository<Student>, StudentRepository>();
+builder.Services.AddScoped<IRepository<Category>, CategoryRepository>();
+builder.Services.AddScoped<IRepositoryGetByName<Category>, CategoryRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
