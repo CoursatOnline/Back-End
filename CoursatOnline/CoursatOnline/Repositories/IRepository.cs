@@ -5,8 +5,8 @@ namespace CoursatOnline.Repositories
     {
         public ICollection<T> getAll();
         public T getById(int id);
-        public int Create(Student std);
-        public int Edit(int id,Student std);
+        public int Create(T obj);
+        public int Edit(int id,T obj);
         public int Delete(int id);
     }
 }
