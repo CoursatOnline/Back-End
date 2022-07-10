@@ -86,13 +86,13 @@ namespace CoursatOnline.Repositories
 
         public Category getById(int id)
         {
-            Category category = db.Category.FirstOrDefault(c => c.Id == id);
+            Category? category = db.Category.FirstOrDefault(c => c.Id == id);
             return category;
         }
 
         public Category getByName(string name)
         {
-            Category category = db.Category.FirstOrDefault(c => c.Name == name);
+            Category? category = db.Category.FirstOrDefault(c => c.Name == name);
             return category;
         }
     }

@@ -4,6 +4,7 @@ using CoursatOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    partial class CoursatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220708231730_updateAdminModel")]
+    partial class updateAdminModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +71,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 28, 55, 510, DateTimeKind.Local).AddTicks(5032));
+                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 17, 30, 95, DateTimeKind.Local).AddTicks(6488));
 
                     b.HasKey("Id");
 
@@ -139,7 +141,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 28, 55, 510, DateTimeKind.Local).AddTicks(5737));
+                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 17, 30, 95, DateTimeKind.Local).AddTicks(6778));
 
                     b.Property<int>("InsId")
                         .HasColumnType("int");
@@ -184,7 +186,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 28, 55, 510, DateTimeKind.Local).AddTicks(6424));
+                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 17, 30, 95, DateTimeKind.Local).AddTicks(7024));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -284,7 +286,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 28, 55, 510, DateTimeKind.Local).AddTicks(7102));
+                        .HasDefaultValue(new DateTime(2022, 7, 9, 1, 17, 30, 95, DateTimeKind.Local).AddTicks(7279));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()

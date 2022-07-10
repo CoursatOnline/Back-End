@@ -7,21 +7,21 @@ namespace CoursatOnline.Controllers
 {
     [Route("api/[controller]/[Action]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class AdminController : ControllerBase
     {
-        IRepository<Category> CatRepo;
-        IRepositoryGetByName<Category> CatRepoGetByName;
-        public CategoryController(IRepository<Category> _repo, IRepositoryGetByName<Category> _CatRepoGetByName)
+        IRepository<Admin> AdminRepo;
+        IRepositoryGetByName<Admin> AdminRepoGetByName;
+        public AdminController(IRepository<Admin> _AdminRepo, IRepositoryGetByName<Admin> _AdminRepoGetByName)
         {
-            this.CatRepo = _repo;
-            this.CatRepoGetByName = _CatRepoGetByName;
+            AdminRepo = _AdminRepo;
+            AdminRepoGetByName = _AdminRepoGetByName;
         }
         //getall
         [HttpGet]
         public ActionResult GetAll()
         {
-            if (CatRepo.getAll().Count > 0)
-                return Ok(CatRepo.getAll());
+            if (AdminRepo.getAll().Count > 0)
+                return Ok(AdminRepo.getAll());
             else
                 return NotFound();
         }
@@ -29,8 +29,8 @@ namespace CoursatOnline.Controllers
         [HttpGet]
         public ActionResult GetAllByName(string word)
         {
-            if (CatRepoGetByName.getAllByName(word).Count > 0)
-                return Ok(CatRepoGetByName.getAllByName(word));
+            if (AdminRepoGetByName.getAllByName(word).Count > 0)
+                return Ok(AdminRepoGetByName.getAllByName(word));
             else
                 return NotFound();
         }
@@ -38,31 +38,31 @@ namespace CoursatOnline.Controllers
         [HttpGet("{id:int}")]
         public ActionResult getById(int id)
         {
-            Category category = CatRepo.getById(id);
-            if (category == null)
+            Admin admin = AdminRepo.getById(id);
+            if (admin == null)
                 return NotFound();
             else
-                return Ok(category);
+                return Ok(admin);
 
         }
         //getByName
         [HttpGet("{name:alpha}")]
         public ActionResult getByName(string name)
         {
-            Category category = CatRepoGetByName.getByName(name);
-            if (category == null)
+            Admin admin = AdminRepoGetByName.getByName(name);
+            if (admin == null)
                 return NotFound();
             else
-                return Ok(category);
+                return Ok(admin);
         }
         //create
         [HttpPost]
-        public ActionResult Create(Category category)
+        public ActionResult Create(Admin admin)
         {
             if (ModelState.IsValid)
             {
-                CatRepo.Create(category);
-                return Created("url", category);
+                AdminRepo.Create(admin);
+                return Created("url", admin);
             }
             else
             {
@@ -71,13 +71,13 @@ namespace CoursatOnline.Controllers
         }
         //update
         [HttpPut("{id}")]
-        public ActionResult edit(int id, Category category)
+        public ActionResult edit(int id, Admin admin)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    CatRepo.Edit(id, category);
+                    AdminRepo.Edit(id, admin);
                     return NoContent();
                 }
                 catch (Exception ex)
@@ -90,18 +90,17 @@ namespace CoursatOnline.Controllers
         }
         //delete
         [HttpDelete("{id}")]
-        public ActionResult delete(int id, Category? category)
+        public ActionResult delete(int id,Admin? admin)
         {
-            int numOfRows = CatRepo.Delete(id);
+            int numOfRows = AdminRepo.Delete(id);
             if (numOfRows <= 0)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(category);
+                return Ok(admin);
             }
         }
-
     }
 }
