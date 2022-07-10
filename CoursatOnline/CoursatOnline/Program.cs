@@ -18,6 +18,8 @@ builder.Services.AddScoped<IRepository<Category>, CategoryRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Category>, CategoryRepository>();
 builder.Services.AddScoped<IRepository<Admin>, AdminRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Admin>, AdminRepository>();
+builder.Services.AddScoped<IRepository<Instructor>, InstructorRepository>();
+builder.Services.AddScoped<IRepositoryGetByName<Instructor>,InstructorRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
