@@ -134,9 +134,6 @@ namespace CoursatOnline.Data
                         .HasForeignKey(Comment => Comment.ChapterId)
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired(false);
-            modelBuilder.Entity<Cart>()
-                .Property(cart => cart.Show)
-                .HasDefaultValue(true);
             modelBuilder.Entity<Category>()
                 .Property(category => category.Show)
                 .HasDefaultValue(true);
