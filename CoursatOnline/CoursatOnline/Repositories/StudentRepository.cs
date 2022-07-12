@@ -26,8 +26,20 @@ namespace CoursatOnline.Repositories
         //create
         public int Create(Student std)
         {
+            int rows = 0;
             db.Student.Add(std);
-            int rows = db.SaveChanges();
+            rows = db.SaveChanges();
+            if(rows > 0)
+            {
+                int stdId = std.Id;
+                Cart cart = new Cart();
+                cart.StdId = stdId;
+                cart.Discount = 0;
+                cart.TotalPrice = 0;
+                db.Cart.Add(cart);
+                rows = db.SaveChanges();
+            }
+          
             return rows;
 
         }

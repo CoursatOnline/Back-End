@@ -76,7 +76,8 @@ namespace CoursatOnline.Repositories
 
         public ICollection<Category> getAll()
         {
-            return db.Category.ToList();
+            List<Category> categories = db.Category.Where(c => c.Show == true).ToList();
+            return categories;
         }
 
         public ICollection<Category> getAllByName(string word)
@@ -87,7 +88,10 @@ namespace CoursatOnline.Repositories
         public Category getById(int id)
         {
             Category? category = db.Category.FirstOrDefault(c => c.Id == id);
-            return category;
+            if (category.Show == false)
+                return null;
+            else
+                return category;
         }
 
         public Category getByName(string name)
