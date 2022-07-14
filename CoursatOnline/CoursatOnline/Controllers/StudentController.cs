@@ -4,18 +4,22 @@ using CoursatOnline.Data;
 using CoursatOnline.Models;
 
 using CoursatOnline.Repositories;
+
+
 namespace CoursatOnline.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
     {
+       
         IRepository<Student> StdRepo;
         public StudentController(IRepository<Student> repo)
         {
             this.StdRepo = repo;
+           
         }
-        
+       
         //getall
         [HttpGet]
         public List<Student> GetAll()
