@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    [Migration("20220712123902_login")]
-    partial class login
+    [Migration("20220716011409_yyyy")]
+    partial class yyyy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,7 +139,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 39, 1, 810, DateTimeKind.Local).AddTicks(3703));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6521));
 
                     b.HasKey("Id");
 
@@ -209,7 +209,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 39, 1, 810, DateTimeKind.Local).AddTicks(3936));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6946));
 
                     b.Property<int>("InsId")
                         .HasColumnType("int");
@@ -244,7 +244,7 @@ namespace CoursatOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ChapterId")
+                    b.Property<int?>("ChapterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -254,7 +254,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 39, 1, 810, DateTimeKind.Local).AddTicks(4132));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7416));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -262,10 +262,9 @@ namespace CoursatOnline.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -348,13 +347,13 @@ namespace CoursatOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CrsId")
+                    b.Property<int?>("CrsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 39, 1, 810, DateTimeKind.Local).AddTicks(4560));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7796));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -732,9 +731,7 @@ namespace CoursatOnline.Migrations
                 {
                     b.HasOne("CoursatOnline.Models.Course", "_Course")
                         .WithMany("_Ratings")
-                        .HasForeignKey("CrsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CrsId");
 
                     b.Navigation("_Course");
                 });

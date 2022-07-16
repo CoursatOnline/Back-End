@@ -18,5 +18,7 @@ namespace CoursatOnline.Models
 
         [Required, StringLength(256)]
         public string Password { get; set; }
+
+        public string? Image { get; set; }
     }
 }

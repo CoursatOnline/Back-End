@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-    public partial class firstone : Migration
+    public partial class yyyy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -267,7 +267,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(504))
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6521))
                 },
                 constraints: table =>
                 {
@@ -319,7 +319,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(744)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6946)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CrsId = table.Column<int>(type: "int", nullable: false),
                     InsId = table.Column<int>(type: "int", nullable: false)
@@ -349,8 +349,8 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(1222)),
-                    CrsId = table.Column<int>(type: "int", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7796)),
+                    CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -359,8 +359,7 @@ namespace CoursatOnline.Migrations
                         name: "FK_Rating_Course_CrsId",
                         column: x => x.CrsId,
                         principalTable: "Course",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -400,12 +399,12 @@ namespace CoursatOnline.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(958)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7416)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    ChapterId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    ChapterId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

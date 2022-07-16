@@ -6,5 +6,6 @@ namespace CoursatOnline.Models
     {
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
+        public string? Image { get; set; }
     }
 }

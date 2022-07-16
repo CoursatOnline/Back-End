@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    [Migration("20220712123050_firstone")]
-    partial class firstone
+    [Migration("20220716012503_editimage")]
+    partial class editimage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -139,7 +139,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(504));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(7418));
 
                     b.HasKey("Id");
 
@@ -209,7 +209,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(744));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(9224));
 
                     b.Property<int>("InsId")
                         .HasColumnType("int");
@@ -244,7 +244,7 @@ namespace CoursatOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ChapterId")
+                    b.Property<int?>("ChapterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -254,7 +254,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(958));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(2535));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -262,10 +262,9 @@ namespace CoursatOnline.Migrations
                         .HasDefaultValue(true);
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -348,13 +347,13 @@ namespace CoursatOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CrsId")
+                    b.Property<int?>("CrsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 12, 14, 30, 50, 486, DateTimeKind.Local).AddTicks(1222));
+                        .HasDefaultValue(new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(3089));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -429,7 +428,6 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Last_Name")
@@ -732,9 +730,7 @@ namespace CoursatOnline.Migrations
                 {
                     b.HasOne("CoursatOnline.Models.Course", "_Course")
                         .WithMany("_Ratings")
-                        .HasForeignKey("CrsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CrsId");
 
                     b.Navigation("_Course");
                 });

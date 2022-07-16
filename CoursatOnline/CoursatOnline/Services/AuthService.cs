@@ -1,4 +1,5 @@
-﻿using CoursatOnline.helpers;
+﻿using CoursatOnline.Data;
+using CoursatOnline.helpers;
 using CoursatOnline.Models;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Identity;
@@ -13,11 +14,13 @@ namespace CoursatOnline.Services
     public class AuthService : IAuthService
     {
         public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
-            IOptions<JWT> jwt)
+            IOptions<JWT> jwt, CoursatOnlineDbContext coursatOnlineDbContext)
         {
             _userManager = userManager;
             _jwt = jwt.Value;
+            _coursatOnlineDbContext = coursatOnlineDbContext;
         }
+        CoursatOnlineDbContext _coursatOnlineDbContext; //=new CoursatOnlineDbContext();
         private readonly UserManager<ApplicationUser> _userManager;//
         private readonly JWT _jwt;
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
@@ -52,6 +55,20 @@ namespace CoursatOnline.Services
 
 
             await _userManager.UpdateAsync(user);
+
+            _coursatOnlineDbContext.Student.Add(new Student
+            {
+
+                Email = model.Email,
+                User_Name = model.Username,
+                Last_Name = model.LastName,
+                First_Name = model.FirstName,
+                Password = model.Password,
+
+            });
+            _coursatOnlineDbContext.SaveChanges();
+
+
 
 
             return new AuthModel
