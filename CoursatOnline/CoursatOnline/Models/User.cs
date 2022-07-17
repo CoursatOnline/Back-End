@@ -8,11 +8,11 @@ namespace CoursatOnline.Models
     public abstract class User
     {
         public int Id { get; set; }
-        [Required]
-        [RegularExpression(@"^[a-zA-Z]{3,15}$")]
+        //[Required]
+       // [RegularExpression(@"^[a-zA-Z]{3,15}$")]
         public string First_Name { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]{3,15}$")]
+       // [RegularExpression(@"^[a-zA-Z]{3,15}$")]
         public string Last_Name { get; set; }
         [Required]
         //[RegularExpression(@"^[A-Za-z][A-Za-z0-9_#*$.-!%]{7,29}$")]
@@ -25,6 +25,7 @@ namespace CoursatOnline.Models
         public string Password { get; set; }
         public string Image { get; set; }
         public bool Show { get; set; }
+        public int app_userId { get; }
         [JsonIgnore]
         public virtual List<Comment>? _Comments { get; set; }
     }

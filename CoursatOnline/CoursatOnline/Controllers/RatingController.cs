@@ -1,52 +1,50 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using CoursatOnline.Data;
-using CoursatOnline.Models;
-
+﻿using CoursatOnline.Models;
 using CoursatOnline.Repositories;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoursatOnline.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class RatingController : ControllerBase
     {
-       
-        IRepository<Student> StdRepo;
-        public StudentController(IRepository<Student> repo)
+        IRepository<Rating> RatingRepo;
+
+        public RatingController(IRepository<Rating> _RatingRepo)
         {
-            this.StdRepo = repo;
-           
+            RatingRepo = _RatingRepo;
         }
-       
         //getall
         [HttpGet]
-        public List<Student> GetAll()
+        public ActionResult GetAll()
         {
-            return StdRepo.getAll().ToList();
+            if (RatingRepo.getAll().Count > 0)
+                return Ok(RatingRepo.getAll());
+            else
+                return NotFound();
         }
 
         //getById
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult getById(int id)
         {
-            Student std = StdRepo.getById(id);
-            if (std == null)
+            Rating rating = RatingRepo.getById(id);
+            if (rating == null)
                 return NotFound();
             else
-                return Ok(std);
+                return Ok(rating);
 
         }
 
         //create
         [HttpPost]
-        public ActionResult Create(Student std)
+        public ActionResult Create(Rating rating)
         {
             if (ModelState.IsValid)
             {
-                StdRepo.Create(std);
-                return Created("url", std);
+                RatingRepo.Create(rating);
+                return Created("url", rating);
             }
             else
             {
@@ -54,14 +52,14 @@ namespace CoursatOnline.Controllers
             }
         }
         //update
-        [HttpPut]
-        public ActionResult edit(int id,Student std)
+        [HttpPut("{id}")]
+        public ActionResult edit(int id, Rating rating)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    StdRepo.Edit(id,std);
+                    RatingRepo.Edit(id, rating);
                     return NoContent();
                 }
                 catch (Exception ex)
@@ -74,16 +72,16 @@ namespace CoursatOnline.Controllers
         }
         //delete
         [HttpDelete("{id}")]
-        public ActionResult delete(int id, Student? std)
+        public ActionResult delete(int id, Rating? rating)
         {
-            int numOfRows = StdRepo.Delete(id);
-            if(numOfRows <= 0)
+            int numOfRows = RatingRepo.Delete(id);
+            if (numOfRows <= 0)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(std);
+                return Ok(rating);
             }
         }
     }

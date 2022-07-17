@@ -3,6 +3,13 @@ using EFCore.CheckConstraints;
 using CoursatOnline.Data;
 using CoursatOnline.Models;
 using CoursatOnline.Repositories;
+using CoursatOnline.helpers;
+
+using Microsoft.AspNetCore.Identity;
+using CoursatOnline.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
 
@@ -14,6 +21,41 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+// ///////////////////////////////
+
+// Add services to the container.
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<CoursatOnlineDbContext>();//**
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
+                .UseSqlServer(builder.Configuration.GetConnectionString("CoursatOnlineConn"))
+                .UseDiscriminatorCheckConstraints()
+                .UseEnumCheckConstraints());
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(o =>
+    {
+        o.RequireHttpsMetadata = false;
+        o.SaveToken = false;
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+// ///////////////////////
 
 builder.Services.AddControllers().AddNewtonsoftJson(n=>n.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
@@ -27,6 +69,9 @@ builder.Services.AddScoped<IRepositoryGetByName<Category>, CategoryRepository>()
 builder.Services.AddScoped<IRepository<Admin>, AdminRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Admin>, AdminRepository>();
 builder.Services.AddScoped<IRepository<Instructor>, InstructorRepository>();
+builder.Services.AddScoped<IRepositoryGetByName<Instructor>,InstructorRepository>();
+builder.Services.AddScoped<IRepository<Comment>, CommentRepository>();
+builder.Services.AddScoped<IRepository<Rating>, RatingRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Instructor>, InstructorRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CoursatOnline.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace CoursatOnline.Data
 {
-    public class CoursatOnlineDbContext:DbContext
+    public class CoursatOnlineDbContext: IdentityDbContext<ApplicationUser>
     {
         public CoursatOnlineDbContext() : base()
         { }
@@ -23,21 +25,24 @@ namespace CoursatOnline.Data
         public DbSet<StudentRating> StudentRating { get; set; }
         public DbSet<StudentRegisters> RegisteredStudent { get; set; }
 
-
+        
+           
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
                         .ToTable("Users")
                         .HasDiscriminator<Roles>("user_role")
-                        .HasValue<Admin>(Roles.Admin)
-                        .HasValue<Instructor>(Roles.Instructor)
-                        .HasValue<Student>(Roles.Student);
-            modelBuilder.Entity<User>()
-                        .HasIndex(u => u.Email)
-                        .IsUnique();
-            modelBuilder.Entity<User>()
-                        .HasIndex(u => u.User_Name)
-                        .IsUnique();
+                        .HasValue<Admin>(Data.Roles.Admin)
+                        .HasValue<Instructor>(Data.Roles.Instructor)
+                        .HasValue<Student>(Data.Roles.Student);
+            //modelBuilder.Entity<User>()
+            //            .HasIndex(u => u.Email)
+            //            .IsUnique();
+            //modelBuilder.Entity<User>()
+            //            .HasIndex(u => u.User_Name)
+            //            .IsUnique();
             modelBuilder.Entity<User>()
                         .Property(u => u.Show)
                         .HasDefaultValue(true);
