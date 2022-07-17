@@ -3,6 +3,8 @@ using EFCore.CheckConstraints;
 using CoursatOnline.Data;
 using CoursatOnline.Models;
 using CoursatOnline.Repositories;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
 
 /* API and web clients will share data through this variable */
 string txt = "";
@@ -41,6 +43,12 @@ builder.Services.AddCors(options =>
         builder.AllowAnyHeader();
     });
 });
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 
 var app = builder.Build();
 
@@ -56,6 +64,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 /* Using CORS */
 app.UseCors(txt);
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+    RequestPath = new PathString("/Resources")
+});
 
 app.MapControllers();
 

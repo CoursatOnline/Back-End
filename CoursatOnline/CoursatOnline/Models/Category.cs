@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-
 namespace CoursatOnline.Models
 {
     public class Category
@@ -11,6 +10,7 @@ namespace CoursatOnline.Models
         //[Range(minimum: 2, maximum: 50, ErrorMessage = "Category Name must be betwen 2 to 50 charactars")]
         public string Name { get; set; }
         public bool Show { get; set; }
+        public string? Image { get; set; }
         [JsonIgnore]
         [ForeignKey("_Admin")]
 

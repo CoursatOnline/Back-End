@@ -60,6 +60,7 @@ namespace CoursatOnline.Repositories
 
             //oldCategory.Id = category.Id;
             oldCategory.Name = category.Name;
+            oldCategory.Image = category.Image;
             oldCategory.Show = category.Show;
             try
             {
