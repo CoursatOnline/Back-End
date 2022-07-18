@@ -3,6 +3,15 @@ using EFCore.CheckConstraints;
 using CoursatOnline.Data;
 using CoursatOnline.Models;
 using CoursatOnline.Repositories;
+using CoursatOnline.helpers;
+
+using Microsoft.AspNetCore.Identity;
+using CoursatOnline.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.FileProviders;
 
 /* API and web clients will share data through this variable */
 string txt = "";
@@ -12,6 +21,41 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+// ///////////////////////////////
+
+// Add services to the container.
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<CoursatOnlineDbContext>();//**
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
+                .UseSqlServer(builder.Configuration.GetConnectionString("CoursatOnlineConn"))
+                .UseDiscriminatorCheckConstraints()
+                .UseEnumCheckConstraints());
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(o =>
+    {
+        o.RequireHttpsMetadata = false;
+        o.SaveToken = false;
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+// ///////////////////////
 
 builder.Services.AddControllers().AddNewtonsoftJson(n=>n.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddDbContext<CoursatOnlineDbContext>(n => n
@@ -52,6 +96,12 @@ builder.Services.AddCors(options =>
         builder.AllowAnyHeader();
     });
 });
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.ValueLengthLimit = int.MaxValue;
+    o.MultipartBodyLengthLimit = int.MaxValue;
+    o.MemoryBufferThreshold = int.MaxValue;
+});
 
 var app = builder.Build();
 
@@ -67,9 +117,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 /* Using CORS */
 app.UseCors(txt);
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Student}/{action=Index}/{id?}");
- app.MapControllers();
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+    RequestPath = new PathString("/Resources")
+});
+
+app.MapControllers();
 
 app.Run();

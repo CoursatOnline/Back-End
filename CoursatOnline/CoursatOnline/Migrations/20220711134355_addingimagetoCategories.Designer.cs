@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    [Migration("20220704151056_addValidation")]
-    partial class addValidation
+    [Migration("20220711134355_addingimagetoCategories")]
+    partial class addingimagetoCategories
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,11 +34,6 @@ namespace CoursatOnline.Migrations
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
-
-                    b.Property<bool>("Show")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
 
                     b.Property<int>("StdId")
                         .HasColumnType("int");
@@ -71,7 +66,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(6260));
+                        .HasDefaultValue(new DateTime(2022, 7, 11, 15, 43, 55, 300, DateTimeKind.Local).AddTicks(6234));
 
                     b.HasKey("Id");
 
@@ -108,8 +103,11 @@ namespace CoursatOnline.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AdminId")
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -141,7 +139,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(7077));
+                        .HasDefaultValue(new DateTime(2022, 7, 11, 15, 43, 55, 300, DateTimeKind.Local).AddTicks(6975));
 
                     b.Property<int>("InsId")
                         .HasColumnType("int");
@@ -186,7 +184,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(7771));
+                        .HasDefaultValue(new DateTime(2022, 7, 11, 15, 43, 55, 300, DateTimeKind.Local).AddTicks(7720));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -286,7 +284,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 4, 17, 10, 55, 861, DateTimeKind.Local).AddTicks(8516));
+                        .HasDefaultValue(new DateTime(2022, 7, 11, 15, 43, 55, 300, DateTimeKind.Local).AddTicks(8551));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -357,6 +355,10 @@ namespace CoursatOnline.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("First_Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -479,9 +481,7 @@ namespace CoursatOnline.Migrations
                 {
                     b.HasOne("CoursatOnline.Models.Admin", "_Admin")
                         .WithMany("_Categories")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdminId");
 
                     b.Navigation("_Admin");
                 });
@@ -624,14 +624,12 @@ namespace CoursatOnline.Migrations
 
             modelBuilder.Entity("CoursatOnline.Models.Payment", b =>
                 {
-                    b.Navigation("_StudentRegistered")
-                        .IsRequired();
+                    b.Navigation("_StudentRegistered");
                 });
 
             modelBuilder.Entity("CoursatOnline.Models.Rating", b =>
                 {
-                    b.Navigation("_StudentRating")
-                        .IsRequired();
+                    b.Navigation("_StudentRating");
                 });
 
             modelBuilder.Entity("CoursatOnline.Models.User", b =>
@@ -653,8 +651,7 @@ namespace CoursatOnline.Migrations
 
             modelBuilder.Entity("CoursatOnline.Models.Student", b =>
                 {
-                    b.Navigation("_Cart")
-                        .IsRequired();
+                    b.Navigation("_Cart");
 
                     b.Navigation("_RatedCourses");
 
