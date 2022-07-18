@@ -29,6 +29,14 @@ builder.Services.AddScoped<IRepositoryGetByName<Instructor>,InstructorRepository
 builder.Services.AddScoped<IRepository<Comment>, CommentRepository>();
 builder.Services.AddScoped<IRepository<Rating>, RatingRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Instructor>, InstructorRepository>();
+builder.Services.AddScoped<IRepository<Course>, CourseRepository>();
+builder.Services.AddScoped<IRepositoryGetByName<Course>, CourseRepository>();
+builder.Services.AddScoped<IRepository<Chapter>, ChapterRepository>();
+builder.Services.AddScoped<IRepositoryGetByName<Chapter>, ChapterRepository>();
+builder.Services.AddScoped<IRepository<Cart>, CartRepository>();
+builder.Services.AddScoped<IRepository<CategoriesCourses>, CategoriesCoursesRepository>();
+builder.Services.AddScoped<IRepository<CartItem>, CartItemRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -59,7 +67,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 /* Using CORS */
 app.UseCors(txt);
-
-app.MapControllers();
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Student}/{action=Index}/{id?}");
+ app.MapControllers();
 
 app.Run();

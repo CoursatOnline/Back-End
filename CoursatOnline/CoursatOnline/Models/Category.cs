@@ -13,7 +13,6 @@ namespace CoursatOnline.Models
         public bool Show { get; set; }
         [JsonIgnore]
         [ForeignKey("_Admin")]
-
         public int? AdminId { get; set; }
         [JsonIgnore]
         public virtual Admin? _Admin { get; set; }
