@@ -23,7 +23,7 @@ namespace CoursatOnline.Models
         [Required]
         //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&-])[A-Za-z\d@$!%*?#&-]{8,}$")]
         public string Password { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
         public bool Show { get; set; }
         public int app_userId { get; }
         [JsonIgnore]

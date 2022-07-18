@@ -1,4 +1,5 @@
-﻿using CoursatOnline.Models;
+﻿using CoursatOnline.Data;
+using CoursatOnline.Models;
 using CoursatOnline.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,13 +14,15 @@ namespace CoursatOnline.Controllers
         {
             _authService = authService;
         }
+
+
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model,Roles role)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _authService.RegisterAsync(model);
+            var result = await _authService.RegisterAsync(model,role);
 
             if (!result.IsAuthenticated)
                 return BadRequest(result.Message);
@@ -27,8 +30,12 @@ namespace CoursatOnline.Controllers
 
             return Ok(result);
         }
+
+        
+
+
         [HttpPost("token")]
-        public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
+        public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)//login
         {
             var result = await _authService.GetTokenAsync(model);
 
