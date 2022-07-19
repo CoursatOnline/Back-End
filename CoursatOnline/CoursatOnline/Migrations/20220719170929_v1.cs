@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-    public partial class yyyy : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace CoursatOnline.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     First_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Last_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -56,14 +57,15 @@ namespace CoursatOnline.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentMethod = table.Column<int>(type: "int", nullable: false),
-                    DateDone = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PaymentAmount = table.Column<double>(type: "float", nullable: false)
+                    cardnumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    month = table.Column<int>(type: "int", nullable: false),
+                    year = table.Column<int>(type: "int", nullable: false),
+                    cvc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    value = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payment", x => x.Id);
-                    table.CheckConstraint("CK_Payment_PaymentMethod_Enum", "[PaymentMethod] IN (0)");
                 });
 
             migrationBuilder.CreateTable(
@@ -223,6 +225,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AdminId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -245,8 +248,8 @@ namespace CoursatOnline.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    InsId = table.Column<int>(type: "int", nullable: false)
+                    Show = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),
+                    InsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,8 +258,7 @@ namespace CoursatOnline.Migrations
                         name: "FK_Course_Users_InsId",
                         column: x => x.InsId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -267,7 +269,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6521))
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3059))
                 },
                 constraints: table =>
                 {
@@ -292,7 +294,9 @@ namespace CoursatOnline.Migrations
                 {
                     CatId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Show = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -318,11 +322,11 @@ namespace CoursatOnline.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Video = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(6946)),
+                    Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3444)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CrsId = table.Column<int>(type: "int", nullable: false),
-                    InsId = table.Column<int>(type: "int", nullable: false)
+                    CrsId = table.Column<int>(type: "int", nullable: true),
+                    InsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -349,7 +353,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7796)),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(5662)),
                     CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -401,7 +405,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 16, 3, 14, 8, 957, DateTimeKind.Local).AddTicks(7416)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3883)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ChapterId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)

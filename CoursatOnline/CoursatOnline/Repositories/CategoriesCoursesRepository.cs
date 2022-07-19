@@ -14,11 +14,12 @@ namespace CoursatOnline.Repositories
         {
             this.db = db;
         }
+
         public int Create(CategoriesCourses catCourse)
         {
+            db.CategoriesCourses.Add(catCourse);
             try
             {
-                db.Add(catCourse);
                 int raw = db.SaveChanges();
                 return raw;
             }catch(Exception ex)
@@ -27,60 +28,42 @@ namespace CoursatOnline.Repositories
             }
         }
 
+        public int Edit(int id, CategoriesCourses obj)
+        {
+            throw new NotImplementedException();
+        }
         public int Delete(int id)
         {
-            CategoriesCourses catCourse = db.CategoriesCourses.FirstOrDefault(cc => (cc.CatId) + (cc.CourseId) == id);
-            if(catCourse == null)
-                return -1;
-            else
-                catCourse.Show = false;
-            try
+            CategoriesCourses catcourse =  db.CategoriesCourses.FirstOrDefault(c => c.Id == id);
+            if(catcourse == null)
             {
+                return -1;
+            }
+            else
+            {
+                db.Remove(catcourse);
                 int raw = db.SaveChanges();
                 return raw;
-            }catch(Exception ex)
-            {
-                return -1;
-            }
-        }
-
-        public int Edit(int id, CategoriesCourses catCourse)
-        {
-            CategoriesCourses oldcatCourse = db.CategoriesCourses.FirstOrDefault(cc => (cc.CatId) + (cc.CourseId) == id);
-            if(oldcatCourse == null)
-            {
-                return -1;
-            }
-            else
-            {
-                oldcatCourse.CourseId = catCourse.CourseId;
-                oldcatCourse.CatId = catCourse.CatId;
-                oldcatCourse.DateAdded = catCourse.DateAdded;
-                oldcatCourse.Show = catCourse.Show;
-                try
-                {
-                    int raw = db.SaveChanges();
-                    return raw;
-                }catch(Exception ex)
-                {
-                    return -1;
-                }
             }
         }
 
         public ICollection<CategoriesCourses> getAll()
         {
-            List<CategoriesCourses> catCourse = db.CategoriesCourses.Where(cc => cc.Show == true).ToList();
-            return catCourse;
+            return db.CategoriesCourses.ToList();
         }
 
-        
         public CategoriesCourses getById(int id)
         {
-            CategoriesCourses? catCourse = db.CategoriesCourses.FirstOrDefault(cc => (cc.CatId) + (cc.CourseId) == id);
-            
-                return catCourse;
+            CategoriesCourses catcourse = db.CategoriesCourses.Find(id);
+            if (catcourse != null)
+            {
+                return catcourse;
+            }
+            else
+                return null;
         }
+        
+
 
     }
 }

@@ -9,10 +9,10 @@
         public int Id { get; set; }
 
         [Required]
-        [Range(minimum: 3, maximum: 30)]
+        //[Range(minimum: 3, maximum: 30)]
         public string Name { get; set; }
 
-        [Range(minimum: 0, maximum: 500)]
+        //[Range(minimum: 0, maximum: 500)]
         public string Description { get; set; }
 
         [Required]
@@ -35,10 +35,20 @@
 
         [JsonIgnore]
         public virtual List<Chapter>? _Chapters { get; set; }
+
+        [JsonIgnore]
         public virtual List<Rating>? _Ratings { get; set; }
+
+        
+        
+        [JsonIgnore]
         //List of cart items courses added in
         public virtual List<CartItem>? _CartItems { get; set; }
+
+        [JsonIgnore]
         public virtual List<StudentRating>? _StudentRatings { get; set; }
+
+        [JsonIgnore]
         public virtual List<StudentRegisters>? _StudentRegistered { get; set; }
     }
 }
