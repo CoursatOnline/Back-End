@@ -17,6 +17,7 @@ namespace CoursatOnline.Controllers
 
 
         [HttpPost("register")]
+        [HttpPost("{role}")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model,Roles role)
         {
             if (!ModelState.IsValid)

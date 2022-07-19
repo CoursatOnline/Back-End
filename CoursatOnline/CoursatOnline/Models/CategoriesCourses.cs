@@ -16,9 +16,9 @@ namespace CoursatOnline.Models
         public bool Show { get; set; }
 
         [JsonIgnore]
-        public virtual Category _Category { get; set; }
+        public virtual Category? _Category { get; set; }
 
         [JsonIgnore]
-        public virtual Course _Course { get; set; }
+        public virtual Course? _Course { get; set; }
     }
 }
