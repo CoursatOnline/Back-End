@@ -24,7 +24,7 @@
         public bool? Show { get; set; }
 
         [ForeignKey("_Instructor")]
-        [JsonIgnore]
+        
         public int? InsId { get; set; }
 
         [JsonIgnore]
@@ -35,7 +35,6 @@
 
         [JsonIgnore]
         public virtual List<Chapter>? _Chapters { get; set; }
-
         [JsonIgnore]
         public virtual List<Rating>? _Ratings { get; set; }
 
@@ -43,11 +42,10 @@
         
         [JsonIgnore]
         //List of cart items courses added in
+        [JsonIgnore]
         public virtual List<CartItem>? _CartItems { get; set; }
-
         [JsonIgnore]
         public virtual List<StudentRating>? _StudentRatings { get; set; }
-
         [JsonIgnore]
         public virtual List<StudentRegisters>? _StudentRegistered { get; set; }
     }

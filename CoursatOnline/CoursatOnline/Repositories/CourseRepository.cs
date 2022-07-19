@@ -80,7 +80,8 @@ namespace CoursatOnline.Repositories
 
         public ICollection<Course> getAllByName(string word)
         {
-            return db.Course.Where(a => a.Name.Contains(word)).ToList();
+            List<Course>? courses = db.Course.Where(a => a.Name.Contains(word) && a.Show == true).ToList();
+            return courses;
         }
 
         public Course getById(int id)
@@ -94,7 +95,7 @@ namespace CoursatOnline.Repositories
 
         public Course getByName(string name)
         {
-            Course? course = db.Course.FirstOrDefault(c => c.Name == name);
+            Course? course = db.Course.FirstOrDefault(c => c.Name == name && c.Show == true);
             return course;
         }
     }

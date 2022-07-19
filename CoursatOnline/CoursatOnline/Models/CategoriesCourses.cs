@@ -23,7 +23,7 @@ namespace CoursatOnline.Models
         [JsonIgnore]
         public virtual Category? _Category { get; set; }
 
-       [JsonIgnore]
+        [JsonIgnore]
         public virtual Course? _Course { get; set; }
     }
 }

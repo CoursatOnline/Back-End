@@ -83,7 +83,8 @@ namespace CoursatOnline.Repositories
 
         public ICollection<Category> getAllByName(string word)
         {
-            return db.Category.Where(c=>c.Name.Contains(word)).ToList();
+           List<Category> categories =  db.Category.Where(c=>c.Show==true && c.Name.Contains(word)).ToList();
+           return categories;
         }
 
         public Category getById(int id)
@@ -97,7 +98,7 @@ namespace CoursatOnline.Repositories
 
         public Category getByName(string name)
         {
-            Category? category = db.Category.FirstOrDefault(c => c.Name == name);
+            Category? category = db.Category.FirstOrDefault(c => c.Name == name && c.Show == true);
             return category;
         }
     }

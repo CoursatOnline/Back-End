@@ -4,6 +4,7 @@ using CoursatOnline.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    partial class CoursatOnlineDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220719110034_updatingCategoryCourseModel")]
+    partial class updatingCategoryCourseModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,11 +142,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-<<<<<<< HEAD
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 19, 14, 5, 52, DateTimeKind.Local).AddTicks(8507));
-=======
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4193));
->>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148
+                        .HasDefaultValue(new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(4633));
 
                     b.HasKey("Id");
 
@@ -165,9 +163,6 @@ namespace CoursatOnline.Migrations
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Show")
                         .HasColumnType("bit");
@@ -223,11 +218,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-<<<<<<< HEAD
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 19, 14, 5, 52, DateTimeKind.Local).AddTicks(8891));
-=======
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4733));
->>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148
+                        .HasDefaultValue(new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5499));
 
                     b.Property<int?>("InsId")
                         .HasColumnType("int");
@@ -271,11 +262,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-<<<<<<< HEAD
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 19, 14, 5, 52, DateTimeKind.Local).AddTicks(9211));
-=======
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5024));
->>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148
+                        .HasDefaultValue(new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5926));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -381,11 +368,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-<<<<<<< HEAD
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 19, 14, 5, 52, DateTimeKind.Local).AddTicks(9529));
-=======
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5303));
->>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148
+                        .HasDefaultValue(new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(6327));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()

@@ -4,7 +4,6 @@ using CoursatOnline.Data;
 using CoursatOnline.Models;
 using CoursatOnline.Repositories;
 using CoursatOnline.helpers;
-
 using Microsoft.AspNetCore.Identity;
 using CoursatOnline.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
