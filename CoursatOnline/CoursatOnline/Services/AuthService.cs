@@ -191,14 +191,14 @@ namespace CoursatOnline.Services
 
             var jwtSecurityToken = await CreateJwtToken(user);//
             var rolesList = await _userManager.GetRolesAsync(user);
-
+            User loginuser = _coursatOnlineDbContext.Users.FirstOrDefault(u => u.Email == model.Email);
             authModel.IsAuthenticated = true;
             authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);//
             authModel.Email = user.Email;
             authModel.Username = user.UserName;
             authModel.ExpiresOn = jwtSecurityToken.ValidTo;
             authModel.Roles = rolesList.ToList();
-
+            authModel.Id = loginuser.Id;
             return authModel;
         }
 
