@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace CoursatOnline.Models
 {
     public class CartItem
@@ -13,8 +15,11 @@ namespace CoursatOnline.Models
         public int CrsId { get; set; }
         
         public DateTime DateAdded { get; set; }
+
+        [JsonIgnore]
         public virtual Cart _Cart { get; set; }
         //public Student _Student { get; set; }
+        [JsonIgnore]
         public virtual Course _Course { get; set; }
     }
 }

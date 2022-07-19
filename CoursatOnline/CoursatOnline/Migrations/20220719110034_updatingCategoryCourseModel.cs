@@ -5,110 +5,92 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-    public partial class editimage : Migration
+    public partial class updatingCategoryCourseModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Image",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
                 table: "Rating",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(3089),
+                defaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(6327),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(3127));
+                oldDefaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(1772));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "Comment",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(2535),
+                defaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5926),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2919));
+                oldDefaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(1229));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "Chapter",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(9224),
+                defaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5499),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2708));
+                oldDefaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(698));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "CartItem",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(7418),
+                defaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(4633),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2385));
+                oldDefaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(207));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Image",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
                 table: "Rating",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(3127),
+                defaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(1772),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(3089));
+                oldDefaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(6327));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "Comment",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2919),
+                defaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(1229),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 349, DateTimeKind.Local).AddTicks(2535));
+                oldDefaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5926));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "Chapter",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2708),
+                defaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(698),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(9224));
+                oldDefaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(5499));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "DateAdded",
                 table: "CartItem",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2022, 7, 16, 3, 14, 30, 215, DateTimeKind.Local).AddTicks(2385),
+                defaultValue: new DateTime(2022, 7, 19, 12, 17, 41, 533, DateTimeKind.Local).AddTicks(207),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2022, 7, 16, 3, 25, 3, 348, DateTimeKind.Local).AddTicks(7418));
+                oldDefaultValue: new DateTime(2022, 7, 19, 13, 0, 33, 807, DateTimeKind.Local).AddTicks(4633));
         }
     }
 }

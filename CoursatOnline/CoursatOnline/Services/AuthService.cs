@@ -23,7 +23,9 @@ namespace CoursatOnline.Services
         CoursatOnlineDbContext _coursatOnlineDbContext; //=new CoursatOnlineDbContext();
         private readonly UserManager<ApplicationUser> _userManager;//
         private readonly JWT _jwt;
-        public async Task<AuthModel> RegisterAsync(RegisterModel model)
+
+        //register student
+        public async Task<AuthModel> RegisterAsync(RegisterModel model,Roles role)
         {
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
                 return new AuthModel { Message = "Email is already registered!" };
@@ -33,6 +35,7 @@ namespace CoursatOnline.Services
 
             var user = new ApplicationUser
             {
+
                 UserName = model.Username,
                 Email = model.Email,
                 First_Name = model.FirstName,
@@ -49,40 +52,132 @@ namespace CoursatOnline.Services
 
                 return new AuthModel { Message = errors };
             }
-            await _userManager.AddToRoleAsync(user, "Student");
+            await _userManager.AddToRoleAsync(user, role.ToString());
 
             var jwtSecurityToken = await CreateJwtToken(user);
 
 
             await _userManager.UpdateAsync(user);
 
-            _coursatOnlineDbContext.Student.Add(new Student
+            
+            //admin 0
+            if (role == Roles.Admin)
+            {
+                _coursatOnlineDbContext.Admin.Add(new Admin
             {
 
-                Email = model.Email,
-                User_Name = model.Username,
-                Last_Name = model.LastName,
-                First_Name = model.FirstName,
-                Password = model.Password,
+                     Email = model.Email,
+                    User_Name = model.Username,
+                    Last_Name = model.LastName,
+                    First_Name = model.FirstName,
+                    Password = model.Password,
 
-            });
-            _coursatOnlineDbContext.SaveChanges();
+                });
+                _coursatOnlineDbContext.SaveChanges();
 
+                return new AuthModel
+                {
+                    Email = user.Email,
+                    ExpiresOn = jwtSecurityToken.ValidTo,
+                    IsAuthenticated = true,
+                    Roles = new List<string> { "Admin" },
+                    Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    Username = user.UserName,
 
+                };
 
-
-            return new AuthModel
+            }
+            //instructor 1
+            if (role == Roles.Instructor)
             {
-                Email = user.Email,
-                ExpiresOn = jwtSecurityToken.ValidTo,
-                IsAuthenticated = true,
-                Roles = new List<string> { "Student" },
-                Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                Username = user.UserName,
+                _coursatOnlineDbContext.Instructor.Add(new Instructor
+                {
 
-            };
+                    Email = model.Email,
+                    User_Name = model.Username,
+                    Last_Name = model.LastName,
+                    First_Name = model.FirstName,
+                    Password = model.Password,
+
+                });
+                _coursatOnlineDbContext.SaveChanges();
+
+                return new AuthModel
+                {
+                    Email = user.Email,
+                    ExpiresOn = jwtSecurityToken.ValidTo,
+                    IsAuthenticated = true,
+                    Roles = new List<string> { "Instructor" },
+                    Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    Username = user.UserName,
+
+                };
+
+            }
+
+            //student 2
+            if (role == Roles.Student)
+            {
+                 
+                _coursatOnlineDbContext.Student.Add(new Student
+                {
+                    
+                    Email = model.Email,
+                    User_Name = model.Username,
+                    Last_Name = model.LastName,
+                    First_Name = model.FirstName,
+                    Password = model.Password,
+
+                });
+                int rows = _coursatOnlineDbContext.SaveChanges();
+                Student? std = _coursatOnlineDbContext.Student.FirstOrDefault(s => s.Email == model.Email);
+                if (rows > 0 && std!=null)
+                {
+                    int stdId = std.Id;
+                    Cart cart = new Cart();
+                    cart.StdId = stdId;
+                    cart.Discount = 0;
+                    cart.TotalPrice = 0;
+                    _coursatOnlineDbContext.Cart.Add(cart);
+                    _coursatOnlineDbContext.SaveChanges();
+                }
+
+
+                return new AuthModel
+                {
+                    Email = user.Email,
+                    ExpiresOn = jwtSecurityToken.ValidTo,
+                    IsAuthenticated = true,
+                    Roles = new List<string> { "Student" },
+                    Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    Username = user.UserName,
+
+                };
+
+            }
+
+
+
+
+            //return new AuthModel
+            //{
+            //    Email = user.Email,
+            //    ExpiresOn = jwtSecurityToken.ValidTo,
+            //    IsAuthenticated = true,
+            //    Roles = new List<string> { "Admin" },//Instructor
+            //    Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            //    Username = user.UserName,
+
+            //};
+            return null;
 
         }
+        
+
+
+           
+       
+        //login
         public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
         {
             var authModel = new AuthModel();
