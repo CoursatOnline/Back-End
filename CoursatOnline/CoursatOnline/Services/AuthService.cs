@@ -35,6 +35,7 @@ namespace CoursatOnline.Services
 
             var user = new ApplicationUser
             {
+
                 UserName = model.Username,
                 Email = model.Email,
                 First_Name = model.FirstName,
@@ -117,9 +118,10 @@ namespace CoursatOnline.Services
             //student 2
             if (role == Roles.Student)
             {
+                 
                 _coursatOnlineDbContext.Student.Add(new Student
                 {
-
+                    
                     Email = model.Email,
                     User_Name = model.Username,
                     Last_Name = model.LastName,
@@ -127,7 +129,19 @@ namespace CoursatOnline.Services
                     Password = model.Password,
 
                 });
-                _coursatOnlineDbContext.SaveChanges();
+                int rows = _coursatOnlineDbContext.SaveChanges();
+                Student? std = _coursatOnlineDbContext.Student.FirstOrDefault(s => s.Email == model.Email);
+                if (rows > 0 && std!=null)
+                {
+                    int stdId = std.Id;
+                    Cart cart = new Cart();
+                    cart.StdId = stdId;
+                    cart.Discount = 0;
+                    cart.TotalPrice = 0;
+                    _coursatOnlineDbContext.Cart.Add(cart);
+                    _coursatOnlineDbContext.SaveChanges();
+                }
+
 
                 return new AuthModel
                 {
