@@ -52,7 +52,7 @@ namespace lab1.Controllers
         }
         //--------------------------------------------GetByName--------------------------------------------
 
-        [HttpGet("{name:alpha}")]
+        [HttpGet("{name}")]
         public ActionResult GetByName(string name)
         {
             Course course = CatRepoGetByName.getByName(name);

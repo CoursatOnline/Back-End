@@ -18,7 +18,7 @@ namespace CoursatOnline.Controllers
         }
 
         [HttpGet]
-        public ActionResult getAny(string s)
+        public ActionResult getAny([FromBody]string s)
         {
             List<Course> crss = CourseRepoGetByName.getAllByName(s).ToList();
             if (crss.Count > 0)
