@@ -17,9 +17,9 @@ namespace CoursatOnline.Models
         public DateTime DateAdded { get; set; }
 
         [JsonIgnore]
-        public virtual Cart _Cart { get; set; }
+        public virtual Cart? _Cart { get; set; }
         //public Student _Student { get; set; }
         [JsonIgnore]
-        public virtual Course _Course { get; set; }
+        public virtual Course? _Course { get; set; }
     }
 }

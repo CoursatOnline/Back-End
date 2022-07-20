@@ -6,10 +6,12 @@ namespace CoursatOnline.Paymentt
 {
     public class MakePayment
     {
-        public static async Task<dynamic> PaymentAsync(string cardnumder, int month, int year, string cvc, int value)
+        String? Token;
+        
+        public  async Task<dynamic> PaymentAsync(string cardnumder, int month, int year, string cvc, int value)
         {
             
-            Payment p = new Payment();
+            
             try
             {
                 StripeConfiguration.ApiKey = "sk_test_51LMQ2dEiGk4ND4kcFA1N0JBXLgKTs62voOubvQxKOD44M8K6Khcw5GYtndFS7kjXMX58D1NTcsFI1QVyX1Ezm9hD00AWhcZs6N";
@@ -34,12 +36,13 @@ namespace CoursatOnline.Paymentt
                     Description = "test",
                     Source = stripetoken.Id
                 };
-
+               
                 var service = new ChargeService();
                 Charge charge = await service.CreateAsync(option);
 
                 if (charge.Paid)
                 {
+                    Token = option.Source;
                     return $"{option.Source}";
                 }
                     

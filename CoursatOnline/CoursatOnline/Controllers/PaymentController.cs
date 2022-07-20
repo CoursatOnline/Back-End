@@ -20,10 +20,11 @@ namespace CoursatOnline.Controllers
         [HttpPost]
         public async Task<dynamic> Pay(Models.Payment mp)
         {
-            //MakePayment.PaymentAsync(mp.cardnumber, mp.month, mp.year, mp.cvc, mp.value);
-            //db.Payment.Add(mp);
-            //await db.SaveChangesAsync();
-            return MakePayment.PaymentAsync(mp.cardnumber, mp.month, mp.year, mp.cvc, mp.value);
+            MakePayment mpMakePayment = new MakePayment();
+            
+            
+            
+            return await mpMakePayment.PaymentAsync(mp.cardnumber, mp.month, mp.year, mp.cvc, mp.value); ; 
 
         }
     }

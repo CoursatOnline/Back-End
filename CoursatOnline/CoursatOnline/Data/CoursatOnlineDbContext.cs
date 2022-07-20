@@ -63,7 +63,7 @@ namespace CoursatOnline.Data
                         .IsRequired(false);
             
             modelBuilder.Entity<StudentRating>()
-                        .HasKey(SR => new { SR.StudentId, SR.RateId });
+                        .HasKey(SR => new { SR.StudentId, SR.RateId , SR._CourseId});
             modelBuilder.Entity<StudentRating>()
                         .HasOne<Student>(SR => SR._Student)
                         .WithMany(Student => Student._RatedCourses)

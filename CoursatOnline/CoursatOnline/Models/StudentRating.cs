@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace CoursatOnline.Models
 {
     public class StudentRating
@@ -7,8 +9,18 @@ namespace CoursatOnline.Models
         public int StudentId { get; set; }
         [ForeignKey("_Rate")]
         public int RateId { get; set; }
-        public virtual  Student _Student { get; set; }
-        public virtual Rating _Rate { get; set; }
-        public virtual Course _Course { get; set; }
+
+        [ForeignKey("_Course")]
+        public int _CourseId { get; set; }
+
+        [JsonIgnore]
+        public virtual  Student? _Student { get; set; }
+
+        [JsonIgnore]
+        public virtual Rating? _Rate { get; set; }
+
+        [JsonIgnore]
+
+        public virtual Course? _Course { get; set; }
     }
 }

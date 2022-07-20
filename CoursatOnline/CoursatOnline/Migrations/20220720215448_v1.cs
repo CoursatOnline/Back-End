@@ -269,7 +269,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 12, 27, 7, 680, DateTimeKind.Local).AddTicks(3600))
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(2201))
                 },
                 constraints: table =>
                 {
@@ -323,7 +323,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 12, 27, 7, 680, DateTimeKind.Local).AddTicks(4017)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(2873)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CrsId = table.Column<int>(type: "int", nullable: true),
                     InsId = table.Column<int>(type: "int", nullable: true)
@@ -353,7 +353,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 12, 27, 7, 680, DateTimeKind.Local).AddTicks(4788)),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(3742)),
                     CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -376,7 +376,7 @@ namespace CoursatOnline.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegisteredStudent", x => new { x.StdId, x.PaymentId });
+                    table.PrimaryKey("PK_RegisteredStudent", x => x.StdId);
                     table.ForeignKey(
                         name: "FK_RegisteredStudent_Course_CourseId",
                         column: x => x.CourseId,
@@ -405,7 +405,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 12, 27, 7, 680, DateTimeKind.Local).AddTicks(4398)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(3311)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ChapterId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
@@ -437,7 +437,7 @@ namespace CoursatOnline.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentRating", x => new { x.StudentId, x.RateId });
+                    table.PrimaryKey("PK_StudentRating", x => new { x.StudentId, x.RateId, x._CourseId });
                     table.ForeignKey(
                         name: "FK_StudentRating_Course__CourseId",
                         column: x => x._CourseId,
