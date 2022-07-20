@@ -15,55 +15,85 @@ namespace CoursatOnline.Repositories
             this.db = db;
         }
 
-        public int Create(CategoriesCourses catCourse)
-        {
-            db.CategoriesCourses.Add(catCourse);
-            try
-            {
-                int raw = db.SaveChanges();
-                return raw;
-            }catch(Exception ex)
-            {
-                return -1;
-            }
-        }
-
-        public int Edit(int id, CategoriesCourses obj)
+        public int Create(CategoriesCourses catId)
         {
             throw new NotImplementedException();
-        }
-        public int Delete(int id)
-        {
-            CategoriesCourses catcourse =  db.CategoriesCourses.FirstOrDefault(c => c.Id == id);
-            if(catcourse == null)
-            {
-                return -1;
-            }
-            else
-            {
-                db.Remove(catcourse);
-                int raw = db.SaveChanges();
-                return raw;
-            }
-        }
 
+        }
         public ICollection<CategoriesCourses> getAll()
         {
             return db.CategoriesCourses.ToList();
         }
 
-        public CategoriesCourses getById(int id)
+        public List<int> getById(int id)
         {
-            CategoriesCourses catcourse = db.CategoriesCourses.Find(id);
-            if (catcourse != null)
+            List<int> course = new List<int>();
+            List<CategoriesCourses> catC = db.CategoriesCourses.ToList();
+            foreach(var item in catC)
             {
-                return catcourse;
+                if(item.CatId == id)
+                {
+                    course.Add(item.CourseId);
+                }
             }
-            else
-                return null;
+            return course;
         }
-        
+        public int Delete(int id)
+        {
+            throw null;
+        }
 
 
+
+        //public CategoriesCourses getByIdComposit(int inst, int cat)
+        //{
+        //    CategoriesCourses catcourse = db.CategoriesCourses.Find(inst,cat);
+        //    if (catcourse != null)
+        //    {
+        //        return catcourse;
+        //    }
+        //    else
+        //        return null;
+        //}
+
+        //public int DeleteComposit(int catId, int courseId)
+        //{
+        //    CategoriesCourses catcourse = db.CategoriesCourses.Find(catId, courseId);
+        //    if (catcourse == null)
+        //    {
+        //        return -1;
+        //    }
+        //    else
+        //    {
+        //        db.Remove(catcourse);
+        //        int raw = db.SaveChanges();
+        //        return raw;
+        //    }
+        //}
+
+        //public int EditComposit(int catId, int courseId, CategoriesCourses obj)
+        //{
+        //    CategoriesCourses? catcourse = db.CategoriesCourses.Find(catId, courseId);
+        //    if(catcourse == null)
+        //    {
+        //        return -1;
+        //    }
+        //    else
+        //    {
+        //        db.CategoriesCourses.Update(obj);
+        //        int raw = db.SaveChanges();
+        //        return raw;
+        //    }
+        //}
+
+        public int Edit(int id, CategoriesCourses obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        CategoriesCourses IRepository<CategoriesCourses>.getById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

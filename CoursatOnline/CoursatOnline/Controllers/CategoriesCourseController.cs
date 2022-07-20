@@ -9,8 +9,8 @@ namespace CoursatOnline.Controllers
     [ApiController]
     public class CartegoriesCourseController : ControllerBase
     {
-        IRepository<CategoriesCourses> CartRepo;
-        public CartegoriesCourseController(IRepository<CategoriesCourses> _repo)
+        CategoriesCourseInterface CartRepo;
+        public CartegoriesCourseController(CategoriesCourseInterface _repo)
         {
             this.CartRepo = _repo;
         }
@@ -27,9 +27,9 @@ namespace CoursatOnline.Controllers
 
         //getById
         [HttpGet("{id:int}")]
-        public ActionResult getById(int id)
+        public ActionResult getById(int categoryId, int courseId)
         {
-            CategoriesCourses catCourse = CartRepo.getById(id);
+            CategoriesCourses catCourse = CartRepo.getByIdComposit(categoryId,courseId);
             if (catCourse == null )
                 return NotFound();
             else
@@ -43,8 +43,16 @@ namespace CoursatOnline.Controllers
         {
             if (ModelState.IsValid)
             {
-                CartRepo.Create(catCourse);
-                return Created("url", catCourse);
+
+                int num = CartRepo.Create(catCourse);
+                if (num >= 0)
+                {
+                    return Created("url", catCourse);
+                }
+                else
+                {
+                    return BadRequest("This ID is Used");
+                }
             }
             else
             {
@@ -53,14 +61,22 @@ namespace CoursatOnline.Controllers
         }
         //update
         [HttpPut("{id}")]
-        public ActionResult edit(int id, CategoriesCourses catCourse)
+        public ActionResult edit(int categoryId, int courseId, CategoriesCourses catCourse)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    CartRepo.Edit(id, catCourse);
-                    return NoContent();
+                    int num = CartRepo.EditComposit(categoryId, courseId, catCourse);
+                    if(num >= 0)
+                    {
+                        return Content("Updated");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -72,9 +88,9 @@ namespace CoursatOnline.Controllers
         }
         //delete
         [HttpDelete("{id}")]
-        public ActionResult delete(int id, CategoriesCourses? catCourse)
+        public ActionResult delete(int categoryId, int courseId, CategoriesCourses? catCourse)
         {
-            int numOfRows = CartRepo.Delete(id);
+            int numOfRows = CartRepo.DeleteComposit(categoryId, courseId);
             if (numOfRows <= 0)
             {
                 return NotFound();

@@ -40,7 +40,7 @@
 
         
         
-        [JsonIgnore]
+       
         //List of cart items courses added in
         [JsonIgnore]
         public virtual List<CartItem>? _CartItems { get; set; }

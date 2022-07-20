@@ -5,11 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
-    public partial class v1 : Migration
-========
-    public partial class one : Migration
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
+    public partial class add : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -273,11 +269,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3059))
-========
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(5430))
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 21, 13, 21, 503, DateTimeKind.Local).AddTicks(5725))
                 },
                 constraints: table =>
                 {
@@ -302,10 +294,7 @@ namespace CoursatOnline.Migrations
                 {
                     CatId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
                     Id = table.Column<int>(type: "int", nullable: false),
-========
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
                     DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Show = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -334,11 +323,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3444)),
-========
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(5763)),
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 21, 13, 21, 503, DateTimeKind.Local).AddTicks(6127)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CrsId = table.Column<int>(type: "int", nullable: true),
                     InsId = table.Column<int>(type: "int", nullable: true)
@@ -368,11 +353,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(5662)),
-========
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(6463)),
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 21, 13, 21, 503, DateTimeKind.Local).AddTicks(6872)),
                     CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -424,11 +405,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-<<<<<<<< HEAD:CoursatOnline/CoursatOnline/Migrations/20220719170929_v1.cs
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 19, 9, 28, 932, DateTimeKind.Local).AddTicks(3883)),
-========
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(6071)),
->>>>>>>> f3cc90c5db8f6f2bc5a3224a6457e714c2ab3148:CoursatOnline/CoursatOnline/Migrations/20220718163335_one.cs
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 21, 13, 21, 503, DateTimeKind.Local).AddTicks(6534)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ChapterId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
