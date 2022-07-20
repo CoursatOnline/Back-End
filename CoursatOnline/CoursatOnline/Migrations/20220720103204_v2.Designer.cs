@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursatOnline.Migrations
 {
     [DbContext(typeof(CoursatOnlineDbContext))]
-    [Migration("20220719134549_updateContextfile")]
-    partial class updateContextfile
+    [Migration("20220720103204_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,7 +142,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4193));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 12, 32, 3, 848, DateTimeKind.Local).AddTicks(4153));
 
                     b.HasKey("Id");
 
@@ -163,6 +163,9 @@ namespace CoursatOnline.Migrations
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Show")
                         .HasColumnType("bit");
@@ -218,7 +221,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4733));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 12, 32, 3, 848, DateTimeKind.Local).AddTicks(4559));
 
                     b.Property<int?>("InsId")
                         .HasColumnType("int");
@@ -262,7 +265,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5024));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 12, 32, 3, 848, DateTimeKind.Local).AddTicks(5025));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -368,7 +371,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5303));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 12, 32, 3, 848, DateTimeKind.Local).AddTicks(5424));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -410,18 +413,18 @@ namespace CoursatOnline.Migrations
                     b.Property<int>("StdId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("_CourseId")
-                        .HasColumnType("int");
+                    b.HasKey("StdId");
 
-                    b.HasKey("StdId", "PaymentId");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("PaymentId")
                         .IsUnique();
-
-                    b.HasIndex("_CourseId");
 
                     b.ToTable("RegisteredStudent");
                 });
@@ -775,6 +778,11 @@ namespace CoursatOnline.Migrations
 
             modelBuilder.Entity("CoursatOnline.Models.StudentRegisters", b =>
                 {
+                    b.HasOne("CoursatOnline.Models.Course", "_Course")
+                        .WithMany("_StudentRegistered")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("CoursatOnline.Models.Payment", "_Payment")
                         .WithOne("_StudentRegistered")
                         .HasForeignKey("CoursatOnline.Models.StudentRegisters", "PaymentId")
@@ -784,12 +792,6 @@ namespace CoursatOnline.Migrations
                         .WithMany("_RegisteredCourses")
                         .HasForeignKey("StdId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("CoursatOnline.Models.Course", "_Course")
-                        .WithMany("_StudentRegistered")
-                        .HasForeignKey("_CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("_Course");
 

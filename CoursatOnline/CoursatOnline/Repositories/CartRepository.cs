@@ -47,9 +47,10 @@ namespace CoursatOnline.Repositories
             Cart? oldCart = db.Cart.FirstOrDefault(c => c.Id == id);
             if(oldCart != null)
             {
-                oldCart.TotalPrice = cart.TotalPrice;
-                oldCart.Discount = cart.Discount;
-                oldCart.StdId = cart.StdId;
+                db.Update(cart);
+                //oldCart.TotalPrice = cart.TotalPrice;
+                //oldCart.Discount = cart.Discount;
+                //oldCart.StdId = cart.StdId;
                 try
                 {
                     int raw = db.SaveChanges();
