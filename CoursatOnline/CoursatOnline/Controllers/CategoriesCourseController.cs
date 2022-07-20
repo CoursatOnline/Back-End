@@ -9,31 +9,42 @@ namespace CoursatOnline.Controllers
     [ApiController]
     public class CartegoriesCourseController : ControllerBase
     {
-        CategoriesCourseInterface CartRepo;
+        CategoriesCourseInterface CartcourseRepo;
         public CartegoriesCourseController(CategoriesCourseInterface _repo)
         {
-            this.CartRepo = _repo;
+            this.CartcourseRepo = _repo;
         }
         //getall
         [HttpGet]
         public ActionResult GetAll()
         {
-            if (CartRepo.getAll().Count > 0)
-                return Ok(CartRepo.getAll());
+            if (CartcourseRepo.getAll().Count > 0)
+                return Ok(CartcourseRepo.getAll());
             else
                 return NotFound();
         }
-        //getAllByName
 
-        //getById
+        //get all courses By catId
         [HttpGet("{id:int}")]
-        public ActionResult getById(int categoryId, int courseId)
+        public ActionResult getAllCourses(int categoryId)
         {
-            CategoriesCourses catCourse = CartRepo.getByIdComposit(categoryId,courseId);
-            if (catCourse == null )
+            List<Course> course = CartcourseRepo.getAllCourses(categoryId);
+            if (CartcourseRepo == null )
                 return NotFound();
             else
-                return Ok(catCourse);
+                return Ok(course);
+
+        }
+
+        //get all category By courseId
+        [HttpGet("{id:int}")]
+        public ActionResult getAllCategory(int courseId)
+        {
+            List<Category> category = CartcourseRepo.getAllCategory(courseId);
+            if (CartcourseRepo == null)
+                return NotFound();
+            else
+                return Ok(category);
 
         }
 
@@ -44,7 +55,7 @@ namespace CoursatOnline.Controllers
             if (ModelState.IsValid)
             {
 
-                int num = CartRepo.Create(catCourse);
+                int num = CartcourseRepo.Create(catCourse);
                 if (num >= 0)
                 {
                     return Created("url", catCourse);
@@ -63,42 +74,43 @@ namespace CoursatOnline.Controllers
         [HttpPut("{id}")]
         public ActionResult edit(int categoryId, int courseId, CategoriesCourses catCourse)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    int num = CartRepo.EditComposit(categoryId, courseId, catCourse);
-                    if(num >= 0)
-                    {
-                        return Content("Updated");
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        int num = CartRepo.EditComposit(categoryId, courseId, catCourse);
+            //        if(num >= 0)
+            //        {
+            //            return Content("Updated");
+            //        }
+            //        else
+            //        {
+            //            return NotFound();
+            //        }
 
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return BadRequest(ex.Message);
+            //    }
 
-            }
-            else return BadRequest(ModelState);
+            //}
+             return BadRequest(ModelState);
         }
         //delete
         [HttpDelete("{id}")]
         public ActionResult delete(int categoryId, int courseId, CategoriesCourses? catCourse)
         {
-            int numOfRows = CartRepo.DeleteComposit(categoryId, courseId);
-            if (numOfRows <= 0)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(catCourse);
-            }
+            //int numOfRows = CartRepo.DeleteComposit(categoryId, courseId);
+            //if (numOfRows <= 0)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
+            //    return Ok(catCourse);
+            //}
+            return Ok();
         }
 
     }

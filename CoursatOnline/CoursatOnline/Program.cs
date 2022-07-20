@@ -77,8 +77,9 @@ builder.Services.AddScoped<IRepositoryGetByName<Course>, CourseRepository>();
 builder.Services.AddScoped<IRepository<Chapter>, ChapterRepository>();
 builder.Services.AddScoped<IRepositoryGetByName<Chapter>, ChapterRepository>();
 builder.Services.AddScoped<IRepository<Cart>, CartRepository>();
-builder.Services.AddScoped<IRepository<CategoriesCourses>, CategoriesCoursesRepository>();
+builder.Services.AddScoped<CategoriesCourseInterface, CategoriesCoursesRepository>();
 builder.Services.AddScoped<IRepository<CartItem>, CartItemRepository>();
+builder.Services.AddScoped<IRepository<StudentRegisters>, StudentRegisterIRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

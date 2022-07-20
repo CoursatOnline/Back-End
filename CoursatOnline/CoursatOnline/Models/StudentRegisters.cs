@@ -7,7 +7,7 @@ namespace CoursatOnline.Models
     {
         [ForeignKey("_Student")]
         public int StdId { get; set; }
-        [ForeignKey("_Payment")]
+       
         public int PaymentId { get; set; }
         [ForeignKey("_Course")]
         public int CourseId { get; set; }
