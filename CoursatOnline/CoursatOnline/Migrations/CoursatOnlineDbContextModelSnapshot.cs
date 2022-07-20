@@ -140,7 +140,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4193));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 2, 22, 36, 910, DateTimeKind.Local).AddTicks(8121));
 
                     b.HasKey("Id");
 
@@ -216,7 +216,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(4733));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 2, 22, 36, 910, DateTimeKind.Local).AddTicks(9086));
 
                     b.Property<int?>("InsId")
                         .HasColumnType("int");
@@ -260,7 +260,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("DateAdded")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5024));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 2, 22, 36, 911, DateTimeKind.Local).AddTicks(9));
 
                     b.Property<bool>("Show")
                         .ValueGeneratedOnAdd()
@@ -366,7 +366,7 @@ namespace CoursatOnline.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 19, 15, 45, 49, 545, DateTimeKind.Local).AddTicks(5303));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 2, 22, 36, 911, DateTimeKind.Local).AddTicks(998));
 
                     b.Property<string>("Rate_Comment")
                         .IsRequired()
@@ -411,15 +411,15 @@ namespace CoursatOnline.Migrations
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("_CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.HasKey("StdId", "PaymentId");
 
+                    b.HasIndex("CourseId");
+
                     b.HasIndex("PaymentId")
                         .IsUnique();
-
-                    b.HasIndex("_CourseId");
 
                     b.ToTable("RegisteredStudent");
                 });
@@ -773,6 +773,11 @@ namespace CoursatOnline.Migrations
 
             modelBuilder.Entity("CoursatOnline.Models.StudentRegisters", b =>
                 {
+                    b.HasOne("CoursatOnline.Models.Course", "_Course")
+                        .WithMany("_StudentRegistered")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("CoursatOnline.Models.Payment", "_Payment")
                         .WithOne("_StudentRegistered")
                         .HasForeignKey("CoursatOnline.Models.StudentRegisters", "PaymentId")
@@ -782,12 +787,6 @@ namespace CoursatOnline.Migrations
                         .WithMany("_RegisteredCourses")
                         .HasForeignKey("StdId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("CoursatOnline.Models.Course", "_Course")
-                        .WithMany("_StudentRegistered")
-                        .HasForeignKey("_CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("_Course");
 

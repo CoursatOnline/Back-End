@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-    public partial class one : Migration
+    public partial class initialcreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -269,7 +269,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(5430))
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9086))
                 },
                 constraints: table =>
                 {
@@ -322,7 +322,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(5763)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9476)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CrsId = table.Column<int>(type: "int", nullable: true),
                     InsId = table.Column<int>(type: "int", nullable: true)
@@ -352,7 +352,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(6463)),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 924, DateTimeKind.Local).AddTicks(312)),
                     CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -404,7 +404,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 18, 18, 33, 35, 467, DateTimeKind.Local).AddTicks(6071)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9839)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ChapterId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)

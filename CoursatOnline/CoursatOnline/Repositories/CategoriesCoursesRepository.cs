@@ -18,7 +18,7 @@ namespace CoursatOnline.Repositories
         {
             try
             {
-                db.Add(catCourse);
+                db.CategoriesCourses.Add(catCourse);
                 int raw = db.SaveChanges();
                 return raw;
             }catch(Exception ex)
