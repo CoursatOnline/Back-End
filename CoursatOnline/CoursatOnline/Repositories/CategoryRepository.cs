@@ -1,5 +1,6 @@
 ﻿using CoursatOnline.Data;
 using CoursatOnline.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoursatOnline.Repositories
 {
@@ -77,6 +78,7 @@ namespace CoursatOnline.Repositories
 
         public ICollection<Category> getAll()
         {
+            
             List<Category> categories = db.Category.Where(c => c.Show == true).ToList();
             return categories;
         }
