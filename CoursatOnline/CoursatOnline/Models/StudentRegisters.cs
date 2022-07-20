@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace CoursatOnline.Models
 {
     public class StudentRegisters
@@ -7,8 +9,13 @@ namespace CoursatOnline.Models
         public int StdId { get; set; }
         [ForeignKey("_Payment")]
         public int PaymentId { get; set; }
-        public virtual Student _Student { get; set; }
-        public virtual Payment _Payment { get; set; }
-        public virtual Course _Course { get; set; }
+        [ForeignKey("_Course")]
+        public int CourseId { get; set; }
+        [JsonIgnore]
+        public virtual Student? _Student { get; set; }
+        [JsonIgnore]
+        public virtual Payment? _Payment { get; set; }
+        [JsonIgnore]
+        public virtual Course? _Course { get; set; }
     }
 }

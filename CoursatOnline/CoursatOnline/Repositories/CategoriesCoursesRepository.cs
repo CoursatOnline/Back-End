@@ -17,12 +17,15 @@ namespace CoursatOnline.Repositories
 
         public int Create(CategoriesCourses catId)
         {
-            throw new NotImplementedException();
-
-        }
-        public ICollection<CategoriesCourses> getAll()
-        {
-            return db.CategoriesCourses.ToList();
+            try
+            {
+                db.CategoriesCourses.Add(catCourse);
+                int raw = db.SaveChanges();
+                return raw;
+            }catch(Exception ex)
+            {
+                return -1;
+            }
         }
 
         public List<int> getById(int id)

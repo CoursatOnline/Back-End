@@ -84,6 +84,13 @@ namespace CoursatOnline.Data
                         .HasForeignKey(SR => SR.StdId)
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired(false);
+            modelBuilder.Entity<Course>()
+                        .HasMany<StudentRegisters>(Course => Course._StudentRegistered)
+                        .WithOne(SR => SR._Course)
+                        .HasForeignKey(SR => SR.CourseId)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired(false);
+
             modelBuilder.Entity<Payment>()
                         .HasOne(Payment => Payment._StudentRegistered)
                         .WithOne(StudentRegisters => StudentRegisters._Payment)

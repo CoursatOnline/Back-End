@@ -1,5 +1,7 @@
 ﻿using CoursatOnline.Models;
+using CoursatOnline.Data;
 using CoursatOnline.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,6 +58,7 @@ namespace CoursatOnline.Controllers
                 return Ok(category);
         }
         //create
+        [Authorize (Roles = "Admin")]
         [HttpPost]
         public ActionResult Create(Category category)
         {

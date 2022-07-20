@@ -113,9 +113,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 /* Using CORS */
 app.UseCors(txt);
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions()
 {
