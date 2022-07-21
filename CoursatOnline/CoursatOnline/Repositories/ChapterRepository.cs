@@ -3,7 +3,7 @@ using CoursatOnline.Models;
 
 namespace CoursatOnline.Repositories
 {
-    public class ChapterRepository : IRepository<Chapter>, IRepositoryGetByName<Chapter>
+    public class ChapterRepository : IRepository<Chapter>, IRepositoryGetByName<Chapter>, IRepositoryGetAllChaptersByCrsId
     {
         private readonly CoursatOnlineDbContext db;
 
@@ -77,6 +77,10 @@ namespace CoursatOnline.Repositories
         public ICollection<Chapter> getAllByName(string word)
         {
             return  db.Chapter.Where(a => a.Title.Contains(word)).ToList();
+        }
+        public ICollection<Chapter> getAllByCrsId(int id)
+        {
+            return db.Chapter.Where(a => a.CrsId == id).ToList();
         }
 
         public Chapter getById(int id)

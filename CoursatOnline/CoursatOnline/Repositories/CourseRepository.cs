@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoursatOnline.Repositories
 {
-    public class CourseRepository : IRepository<Course>,IRepositoryGetByName<Course>
+    public class CourseRepository : IRepository<Course>,IRepositoryGetByName<Course>,IRepositoryGetAllCoursesByInsId
     {
         private readonly CoursatOnlineDbContext db;
 
@@ -97,6 +97,12 @@ namespace CoursatOnline.Repositories
         {
             Course? course = db.Course.FirstOrDefault(c => c.Name == name && c.Show == true);
             return course;
+        }
+
+        public ICollection<Course> getAllByInsId(int id)
+        {
+            List<Course>? courses = db.Course.Where(a => a.InsId == id && a.Show == true).ToList();
+            return courses;
         }
     }
 }

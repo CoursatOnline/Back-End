@@ -10,10 +10,12 @@ namespace CoursatOnline.Controllers
     {
         IRepository<Chapter> repo;
         IRepositoryGetByName<Chapter> ChapterRepoGetByName;
-        public ChapterController(IRepository<Chapter> _repo, IRepositoryGetByName<Chapter> _ChapterRepoGetByName)
+        IRepositoryGetAllChaptersByCrsId ChaptersRepoGetByCrsId;
+        public ChapterController(IRepository<Chapter> _repo, IRepositoryGetByName<Chapter> _ChapterRepoGetByName, IRepositoryGetAllChaptersByCrsId _ChaptersRepoGetByCrsId)
         {
             this.repo = _repo;
             this.ChapterRepoGetByName = _ChapterRepoGetByName;
+            this.ChaptersRepoGetByCrsId = _ChaptersRepoGetByCrsId;
         }
         //--------------------------------------------Get All Chapters--------------------------------------------
 
@@ -43,6 +45,15 @@ namespace CoursatOnline.Controllers
         {
             if (ChapterRepoGetByName.getAllByName(word).Count > 0)
                 return Ok(ChapterRepoGetByName.getAllByName(word));
+            else
+                return NotFound("Not Found Any Chapter");
+        }
+        //--------------------------------------------getAllChaptersByCrsId--------------------------------------------
+        [HttpGet("{crsid:int}")]
+        public ActionResult GetAllByCrsId(int crsid)
+        {
+            if (ChaptersRepoGetByCrsId.getAllByCrsId(crsid).Count > 0)
+                return Ok(ChaptersRepoGetByCrsId.getAllByCrsId(crsid));
             else
                 return NotFound("Not Found Any Chapter");
         }

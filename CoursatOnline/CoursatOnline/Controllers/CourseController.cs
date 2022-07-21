@@ -12,10 +12,12 @@ namespace lab1.Controllers
     {
         IRepository<Course> repo;
         IRepositoryGetByName<Course> CatRepoGetByName;
-        public CourseController(IRepository<Course> _repo, IRepositoryGetByName<Course> _CatRepoGetByName)
+        IRepositoryGetAllCoursesByInsId getAllCoursesByInsIdRepo;
+        public CourseController(IRepository<Course> _repo, IRepositoryGetByName<Course> _CatRepoGetByName,IRepositoryGetAllCoursesByInsId _getAllCoursesByInsId)
         {
             this.repo = _repo;
             this.CatRepoGetByName = _CatRepoGetByName;
+            this.getAllCoursesByInsIdRepo = _getAllCoursesByInsId;
         }
         //-------------------------------------------- GetAll Courses--------------------------------------------
         [HttpGet]
@@ -63,6 +65,22 @@ namespace lab1.Controllers
             else
             {
                 return Ok(course);
+            }
+
+        }
+        //--------------------------------------------GetAll By InsId--------------------------------------------
+
+        [HttpGet("{insid}")]
+        public ActionResult GetByInsId(int insid)
+        {
+            List<Course> courses = getAllCoursesByInsIdRepo.getAllByInsId(insid).ToList();
+            if (courses == null)
+            {
+                return NotFound("Not Found Course By This Name");
+            }
+            else
+            {
+                return Ok(courses);
             }
 
         }
