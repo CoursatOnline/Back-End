@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CoursatOnline.Data;
 using CoursatOnline.Models;
+using Microsoft.EntityFrameworkCore;
 namespace CoursatOnline.Repositories
 {
     public class StudentRepository : IRepository<Student>
@@ -14,12 +15,13 @@ namespace CoursatOnline.Repositories
         //getall
         public ICollection<Student> getAll()
         {
-            return db.Student.ToList();
+            return db.Student.Include(s=>s._Cart).ToList();
+            
         }
         //get by ID
         public Student getById(int id)
         {
-            Student std = db.Student.Where(S => S.Id == id).FirstOrDefault();
+            Student std = db.Student.Include(s => s._Cart).Where(S => S.Id == id).FirstOrDefault();
             return std;
 
         }

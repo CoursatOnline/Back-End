@@ -6,6 +6,7 @@
 
     public class Course
     {
+        
         public int Id { get; set; }
 
         [Required]
@@ -38,6 +39,10 @@
         public virtual List<Chapter>? _Chapters { get; set; }
         [JsonIgnore]
         public virtual List<Rating>? _Ratings { get; set; }
+
+        
+        
+       
         //List of cart items courses added in
         [JsonIgnore]
         public virtual List<CartItem>? _CartItems { get; set; }

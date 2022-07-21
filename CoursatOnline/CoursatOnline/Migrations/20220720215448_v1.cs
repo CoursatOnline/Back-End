@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CoursatOnline.Migrations
 {
-    public partial class initialcreation : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -269,7 +269,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CrsId = table.Column<int>(type: "int", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9086))
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(2201))
                 },
                 constraints: table =>
                 {
@@ -294,6 +294,7 @@ namespace CoursatOnline.Migrations
                 {
                     CatId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Show = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -322,7 +323,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9476)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(2873)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CrsId = table.Column<int>(type: "int", nullable: true),
                     InsId = table.Column<int>(type: "int", nullable: true)
@@ -352,7 +353,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ratio = table.Column<double>(type: "float", nullable: false),
                     Rate_Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 924, DateTimeKind.Local).AddTicks(312)),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(3742)),
                     CrsId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -371,17 +372,17 @@ namespace CoursatOnline.Migrations
                 {
                     StdId = table.Column<int>(type: "int", nullable: false),
                     PaymentId = table.Column<int>(type: "int", nullable: false),
-                    _CourseId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegisteredStudent", x => new { x.StdId, x.PaymentId });
+                    table.PrimaryKey("PK_RegisteredStudent", x => x.StdId);
                     table.ForeignKey(
-                        name: "FK_RegisteredStudent_Course__CourseId",
-                        column: x => x._CourseId,
+                        name: "FK_RegisteredStudent_Course_CourseId",
+                        column: x => x.CourseId,
                         principalTable: "Course",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_RegisteredStudent_Payment_PaymentId",
                         column: x => x.PaymentId,
@@ -404,7 +405,7 @@ namespace CoursatOnline.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 19, 18, 17, 45, 923, DateTimeKind.Local).AddTicks(9839)),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 20, 23, 54, 48, 659, DateTimeKind.Local).AddTicks(3311)),
                     Show = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ChapterId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
@@ -436,7 +437,7 @@ namespace CoursatOnline.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentRating", x => new { x.StudentId, x.RateId });
+                    table.PrimaryKey("PK_StudentRating", x => new { x.StudentId, x.RateId, x._CourseId });
                     table.ForeignKey(
                         name: "FK_StudentRating_Course__CourseId",
                         column: x => x._CourseId,
@@ -553,9 +554,9 @@ namespace CoursatOnline.Migrations
                 column: "CrsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegisteredStudent__CourseId",
+                name: "IX_RegisteredStudent_CourseId",
                 table: "RegisteredStudent",
-                column: "_CourseId");
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RegisteredStudent_PaymentId",

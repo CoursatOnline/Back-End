@@ -12,7 +12,7 @@ namespace CoursatOnline.Data
         { }
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Instructor> Instructor { get; set; }
-        public DbSet<Student> Student { get; set; }
+        public  DbSet<Student> Student { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Course> Course { get; set; }
@@ -63,7 +63,7 @@ namespace CoursatOnline.Data
                         .IsRequired(false);
             
             modelBuilder.Entity<StudentRating>()
-                        .HasKey(SR => new { SR.StudentId, SR.RateId });
+                        .HasKey(SR => new { SR.StudentId, SR.RateId , SR._CourseId});
             modelBuilder.Entity<StudentRating>()
                         .HasOne<Student>(SR => SR._Student)
                         .WithMany(Student => Student._RatedCourses)
@@ -77,7 +77,7 @@ namespace CoursatOnline.Data
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired(false);
             modelBuilder.Entity<StudentRegisters>()
-                        .HasKey(SRE => new { SRE.StdId, SRE.PaymentId });
+                        .HasKey(SRE => new { SRE.StdId});
             modelBuilder.Entity<StudentRegisters>()
                         .HasOne<Student>(SR => SR._Student)
                         .WithMany(Student => Student._RegisteredCourses)
@@ -94,7 +94,7 @@ namespace CoursatOnline.Data
             modelBuilder.Entity<Payment>()
                         .HasOne(Payment => Payment._StudentRegistered)
                         .WithOne(StudentRegisters => StudentRegisters._Payment)
-                        .HasForeignKey<StudentRegisters>(SR => SR.PaymentId)
+                       
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired(false);
 

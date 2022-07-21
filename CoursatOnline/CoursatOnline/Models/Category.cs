@@ -16,6 +16,9 @@ namespace CoursatOnline.Models
         public int? AdminId { get; set; }
         [JsonIgnore]
         public virtual Admin? _Admin { get; set; }
+
+
+
         [JsonIgnore]
         public virtual List<CategoriesCourses>? _CategoriesCourses { get; set; }
     }

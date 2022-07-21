@@ -2,6 +2,7 @@
 using CoursatOnline.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CoursatOnline.Data;
 
 namespace CoursatOnline.Controllers
 {
@@ -9,12 +10,22 @@ namespace CoursatOnline.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
+        CoursatOnlineDbContext db;
+        public PaymentController(CoursatOnlineDbContext db)
+        {
+            this.db = db;
+        }
+
         [Route("pay")]
         [HttpPost]
         public async Task<dynamic> Pay(Models.Payment mp)
         {
+            MakePayment mpMakePayment = new MakePayment();
             
-            return await MakePayment.PaymentAsync(mp.cardnumber, mp.month, mp.year, mp.cvc, mp.value);
+            
+            
+            return await mpMakePayment.PaymentAsync(mp.cardnumber, mp.month, mp.year, mp.cvc, mp.value); ; 
+
         }
     }
 }
